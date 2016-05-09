@@ -1,0 +1,26 @@
+{
+  "name": "babel-plugin-import-auto-name",
+  "version": "0.1.0",
+  "description": "Babel plugin to auto-expand nameless imports",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shnhrrsn/babel-plugin-import-auto-name.git"
+  },
+  "keywords": [
+    "babel",
+    "babel-plugin",
+    "module",
+    "require",
+    "import"
+  ],
+  "author": {
+    "name": "Shaun Harrison",
+    "email": "npm@shnhrrsn.com",
+    "url": "http://twitter.com/shnhrrsn"
+  },
+  "license": "MIT"
+}
