@@ -10,7 +10,7 @@ Here’s a simple example:
 
 ```js
 // Instead of using this:
-import {thing} from 'some/thing';
+import { thing } from 'some/thing';
 
 // You can just use:
 import 'some/thing';

@@ -4,7 +4,7 @@
   "description": "Babel plugin to auto-expand nameless imports",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm -fr lib && babel -s inline -d lib/ src/"
   },
   "repository": {
     "type": "git",
@@ -19,8 +19,13 @@
   ],
   "author": {
     "name": "Shaun Harrison",
-    "email": "npm@shnhrrsn.com",
+    "email": "npm@shaun.harrison.xyz",
     "url": "http://twitter.com/shnhrrsn"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-preset-es2016-node5": "^1.1.2",
+    "babel-register": "^6.22.0"
+  }
 }
