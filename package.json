@@ -4,7 +4,8 @@
   "description": "Babel plugin to auto-expand nameless imports",
   "main": "lib/index.js",
   "scripts": {
-    "build": "rm -fr lib && babel -s inline -d lib/ src/"
+    "build": "rm -fr lib && babel -s inline -d lib/ src/",
+    "test": "ava --verbose"
   },
   "repository": {
     "type": "git",
@@ -24,8 +25,15 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "ava": "^0.18.0",
     "babel-cli": "^6.22.2",
     "babel-preset-es2016-node5": "^1.1.2",
     "babel-register": "^6.22.0"
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
   }
 }
