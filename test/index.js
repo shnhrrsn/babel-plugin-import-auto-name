@@ -18,8 +18,20 @@ function transformFixture(fixture, callback) {
 	})
 }
 
-test('import', it => {
+test('import resolvable', it => {
+	return transformFixture('test2.js').then(code => {
+		it.is(code, '\'use strict\';\n\nvar _test = require(\'./test.js\');')
+	})
+})
+
+test('import unresolvable', it => {
 	return transformFixture('test.js').then(code => {
 		it.is(code, '\'use strict\';\n\nvar _a = require(\'./a\');')
+	})
+})
+
+test('import folder', it => {
+	return transformFixture('test3.js').then(code => {
+		it.is(code, '\'use strict\';\n\nvar _index = require(\'./lib/index.js\');\n\n_index.lib.func();')
 	})
 })

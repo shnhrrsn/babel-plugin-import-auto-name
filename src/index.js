@@ -1,11 +1,20 @@
 const path = require('path')
+const fs = require('fs')
+
+function stat(file) {
+	try {
+		return fs.statSync(file)
+	} catch(err) {
+		return null
+	}
+}
 
 function transform(t, nodePath, file) {
 	if(nodePath.node.specifiers.length > 0) {
 		return
 	}
 
-	const importPath = nodePath.node.source.value
+	let importPath = nodePath.node.source.value
 
 	if(importPath.indexOf('/') < 0) {
 		return
@@ -17,10 +26,28 @@ function transform(t, nodePath, file) {
 		return
 	}
 
+	const dirname = path.dirname(path.resolve(process.cwd(), file.file.opts.filename))
+
+	let stats = stat(path.resolve(dirname, importPath))
+
+	if(!stats) {
+		stats = stat(path.resolve(dirname, importPath) + '.js')
+
+		if(stats) {
+			importPath += '.js'
+		}
+	} else if(stats.isDirectory()) {
+		stats = stat(path.resolve(dirname, importPath, './index.js'))
+
+		if(stats) {
+			importPath += '/index.js'
+		}
+	}
+
 	nodePath.replaceWith(
 		t.importDeclaration(
 			[ t.importSpecifier(t.identifier(name), t.identifier(name)) ],
-			t.stringLiteral(nodePath.node.source.value)
+			t.stringLiteral(importPath)
 		)
 	)
 }
