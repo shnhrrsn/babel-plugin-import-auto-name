@@ -26,21 +26,23 @@ function transform(t, nodePath, file) {
 		return
 	}
 
-	const dirname = path.dirname(path.resolve(process.cwd(), file.file.opts.filename))
+	if(file.opts.autoresolve) {
+		const dirname = path.dirname(path.resolve(process.cwd(), file.file.opts.filename))
 
-	let stats = stat(path.resolve(dirname, importPath))
+		let stats = stat(path.resolve(dirname, importPath))
 
-	if(!stats) {
-		stats = stat(path.resolve(dirname, importPath) + '.js')
+		if(!stats) {
+			stats = stat(path.resolve(dirname, importPath) + '.js')
 
-		if(stats) {
-			importPath += '.js'
-		}
-	} else if(stats.isDirectory()) {
-		stats = stat(path.resolve(dirname, importPath, './index.js'))
+			if(stats) {
+				importPath += '.js'
+			}
+		} else if(stats.isDirectory()) {
+			stats = stat(path.resolve(dirname, importPath, './index.js'))
 
-		if(stats) {
-			importPath += '/index.js'
+			if(stats) {
+				importPath += '/index.js'
+			}
 		}
 	}
 

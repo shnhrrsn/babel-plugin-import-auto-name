@@ -7,7 +7,13 @@ function transformFixture(fixture, callback) {
 	return new Promise((resolve, reject) => {
 		transformFile(path.join(__dirname, 'fixtures', fixture), {
 			presets: [ 'es2016-node5' ],
-			plugins: [ plugin ]
+			plugins: [
+				[
+					plugin, {
+						autoresolve: true
+					}
+				]
+			]
 		}, (err, result) => {
 			if(err) {
 				return reject(err)
