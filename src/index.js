@@ -26,7 +26,7 @@ function transform(t, nodePath, file) {
 		return
 	}
 
-	if(file.opts.autoresolve) {
+	if(file.opts.autoresolve || process.env.BABEL_AUTORESOLVE === 'true') {
 		const dirname = path.dirname(path.resolve(process.cwd(), file.file.opts.filename))
 
 		let stats = stat(path.resolve(dirname, importPath))
